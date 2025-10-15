@@ -12,9 +12,17 @@ import io
 from datetime import datetime, date
 from typing import Dict, List
 import time
+import subprocess
+import sys
 
 # scraping.pyからJRAOddsScraperクラスをインポート
 from scraping import JRAOddsScraper
+
+# Playwrightブラウザのインストール（Streamlit Cloud用）
+try:
+    subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True, capture_output=True)
+except subprocess.CalledProcessError:
+    st.warning("Playwrightブラウザのインストールに失敗しました。一部機能が制限される可能性があります。")
 
 
 def format_odds_for_display(odds_data: Dict) -> pd.DataFrame:
